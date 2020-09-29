@@ -3,8 +3,6 @@
 
 # contents
 
-- [variable name conventions](#variable-name-conventions)
-- [equals `=` `≈` `≠` `:=`](#equals-symbols)
 - [square root and complex numbers `√` *`i`*](#square-root-and-complex-numbers)
 - [dot & cross `·` `×` `∘`](#dot--cross)
   - [scalar multiplication](#scalar-multiplication)
@@ -35,40 +33,6 @@
 - [more...](#more)
 
 
-You might see the `:=`, `=:` and `=` symbols being used for *definition*.<sup>[1]</sup>
-
-For example, the following defines *x* to be another name for 2*kj*.
-
-![equals1](http://latex.codecogs.com/svg.latex?x%20%3A%3D%202kj)
-
-<!-- x := 2kj -->
-
-In JavaScript, we might use `var` to *define* our variables and provide aliases:
-
-```js
-var x = 2 * k * j
-```
-
-However, this is mutable, and only takes a snapshot of the values at that time. Some languages have pre-processor `#define` statements, which are closer to a mathematical *define*. 
-
-A more accurate *define* in JavaScript (ES6) might look a bit like this:
-
-```js
-const f = (k, j) => 2 * k * j
-```
-
-The following, on the other hand, represents equality:
-
-![equals2](http://latex.codecogs.com/svg.latex?x%20%3D%202kj)
-
-<!-- x = 2kj -->
-
-The above equation might be interpreted in code as an [assertion](https://developer.mozilla.org/en-US/docs/Web/API/console/assert):
-
-```js
-console.assert(x === (2 * k * j))
-```
-
 ## square root and complex numbers
 
 A square root operation is of the form:
@@ -79,44 +43,55 @@ A square root operation is of the form:
 
 In programming we use a `sqrt` function, like so: 
 
-```js
-var x = 9;
-console.log(Math.sqrt(x));
-//=> 3
+```cpp
+#include <math.h>
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+  int number = 16;
+  double sqrtOfNumber = sqrt(number);
+  
+  cout << sqrtOfNumber;
+  //=>  4
+}
 ```
 
 Complex numbers are expressions of the form ![complex](http://latex.codecogs.com/svg.latex?a&space;&plus;&space;ib), where ![a](http://latex.codecogs.com/svg.latex?a) is the real part and ![b](http://latex.codecogs.com/svg.latex?b) is the imaginary part. The imaginary number ![i](http://latex.codecogs.com/svg.latex?i) is defined as:
 
 ![imaginary](http://latex.codecogs.com/svg.latex?i%3D%5Csqrt%7B-1%7D).
 <!-- i=\sqrt{-1} -->
+https://en.cppreference.com/w/cpp/numeric/complex
 
-In JavaScript, there is no built-in functionality for complex numbers, but there are some libraries that support complex number arithmetic. For example, using [mathjs](https://www.npmjs.com/package/mathjs):
+```cpp
+#include <iostream>
+#include <iomanip>
+#include <complex>
+#include <cmath>
 
-```js
-var math = require('mathjs')
+using namespace std;
 
-var a = math.complex(3, -1)
-//=> { re: 3, im: -1 }
+int main()
+{
+    // rounds the numbers
+    cout << fixed << setprecision(1);
 
-var b = math.sqrt(-1)
-//=> { re: 0, im: 1 }
-
-console.log(math.multiply(a, b).toString())
-//=> '1 + 3i'
+    // *IMAGINARY* unit multiplication
+    complex<double> numOne = 1i * 1i;    
+    cout << "i * i = " << numOne << "\n";
+    // => i * i = (-1.0,0.0)
+ 
+    // conjugates. YOU MUST USE DOUBLES, NO INTEGERS!
+    complex<double> numFour = 1.0 + 2i,
+                    numFive = 1.0 - 2i; 
+    cout << "(1+2i)*(1-2i) = "   << numFour*numFive;
+    // => (1+2i)*(1-2i) = (5.0,0.0) 
+}
 ```
 
-The library also supports evaluating a string expression, so the above could be re-written as:
 
-```js
-console.log(math.eval('(3 - i) * i').toString())
-//=> '1 + 3i'
-```
-
-Other implementations:
-
-- [immutable-complex](https://www.npmjs.com/package/immutable-complex)
-- [complex-js](https://www.npmjs.com/package/complex-js)
-- [Numeric-js](http://www.numericjs.com/)
 
 ## dot & cross
 
@@ -134,8 +109,8 @@ Both symbols can represent simple multiplication of scalars. The following are e
 
 In programming languages we tend to use asterisk for multiplication:
 
-```js
-var result = 5 * 4
+```cpp
+int result = 5 * 4;
 ```
 
 Often, the multiplication sign is only used to avoid ambiguity (e.g. between two numbers). Here, we can omit it entirely:
@@ -146,8 +121,8 @@ Often, the multiplication sign is only used to avoid ambiguity (e.g. between two
 
 If these variables represent scalars, the code would be:
 
-```js
-var result = 3 * k * j
+```cpp
+int result = 3 * k * j;
 ```
 
 #### vector multiplication
@@ -996,3 +971,9 @@ Interval.difference(a, b)
 Interval.difference(b, a)
 // {lo: 5, hi: 6}
 ```
+
+probable updates:
+   evaluating a string expression
+
+
+copied for non-profit reasons from Jam3/math-as-code
