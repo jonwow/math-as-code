@@ -239,20 +239,38 @@ The big Greek `Σ` (Sigma) is for [Summation](https://en.wikipedia.org/wiki/Summ
 
 Here, `i=1` says to start at `1` and end at the number above the Sigma, `100`. These are the lower and upper bounds, respectively. The *i* to the right of the "E" tells us what we are summing. In code:
 
-```js
-var sum = 0
-for (var i = 1; i <= 100; i++) {
-  sum += i
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main() {
+  int sum = 0;
+
+  for (int i = 1; i <= 100; i++) 
+  {
+    sum += i;
+  }
+
+  cout << sum;
+  // => 5050
 }
 ```
 
-The result of `sum` is `5050`.
 
 **Tip:** With whole numbers, this particular pattern can be optimized to the following:
 
-```js
-var n = 100 // upper bound
-var sum = (n * (n + 1)) / 2
+```#include <iostream>
+
+using namespace std;
+
+int main() {
+  int n = 100; // upper bound
+  int sum = (n * (n + 1)) / 2;
+  
+  cout << sum;
+  // => 5050
+}
 ```
 
 Here is another example where the *i*, or the "what to sum," is different:
@@ -263,14 +281,24 @@ Here is another example where the *i*, or the "what to sum," is different:
 
 In code:
 
-```js
-var sum = 0
-for (var i = 1; i <= 100; i++) {
-  sum += (2 * i + 1)
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main() {
+  int sum = 0;
+
+  for (int i = 1; i <= 100; i++) 
+  {
+    sum += (2 * i + 1);
+  }
+
+  cout << sum;
+  // => 10200
 }
 ```
 
-The result of `sum` is `10200`.
 
 The notation can be nested, which is much like nesting a `for` loop. You should evaluate the right-most sigma first, unless the author has enclosed them in parentheses to alter the order. However, in the following case, since we are dealing with finite sums, the order does not matter.
 
@@ -280,12 +308,24 @@ The notation can be nested, which is much like nesting a `for` loop. You should 
 
 In code:
 
-```js
-var sum = 0
-for (var i = 1; i <= 2; i++) {
-  for (var j = 4; j <= 6; j++) {
-    sum += (3 * i * j)
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main() {
+  int sum = 0;
+
+  for (int i = 1; i <= 2; i++) 
+  {
+    for (int j = 4; j <= 6; j++) 
+    {
+      sum += (3 * i * j);
+    }
   }
+
+  cout << sum;
+  // => 135
 }
 ```
 
@@ -304,9 +344,11 @@ Take the following:
 In code, it might look like this:
 
 ```js
-var value = 1
-for (var i = 1; i <= 6; i++) {
-  value *= i
+int value = 1;
+
+for (int i = 1; i <= 6; i++) 
+{
+  value = value * i;
 }
 ```
 
@@ -326,9 +368,11 @@ These three features all describe the *length* of an object.
 
 For a number *x*, `|x|` means the absolute value of *x*. In code:
 
-```js
-var x = -5
-var result = Math.abs(x)
+```cpp
+int x = -5;
+
+if (x < 0)
+  x = -x;
 // => 5
 ```
 
