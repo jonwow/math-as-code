@@ -4,15 +4,14 @@
 # contents
 
 - [square root and complex numbers `√` *`i`*](#square-root-and-complex-numbers)
-- [dot & cross `·` `×` `∘`](#dot--cross)
-  - [scalar multiplication](#scalar-multiplication)
-  - [vector multiplication](#vector-multiplication)
-  - [dot product](#dot-product)
-  - [cross product](#cross-product)
+
 - [sigma `Σ`](#sigma) - *summation*
 - [capital Pi `Π`](#capital-pi) - *products of sequences*
 - [pipes `||`](#pipes)
   - [absolute value](#absolute-value)
+  
+  
+  
   - [Euclidean norm](#euclidean-norm)
   - [determinant](#determinant)
 - [hat **`â`**](#hat) - *unit vector*
@@ -30,6 +29,11 @@
   - [conjunction & disjunction `∧` `∨`](#conjunction--disjunction)
 - [logical negation `¬` `~` `!`](#logical-negation)
 - [intervals](#intervals)
+- [dot & cross `·` `×` `∘`](#dot--cross)
+  - [scalar multiplication](#scalar-multiplication)
+  - [vector multiplication](#vector-multiplication)
+  - [dot product](#dot-product)
+  - [cross product](#cross-product)
 - [more...](#more)
 
 
@@ -92,143 +96,6 @@ int main()
 ```
 
 
-
-## dot & cross
-
-The dot `·` and cross `×` symbols have different uses depending on context.
-
-They might seem obvious, but it's important to understand the subtle differences before we continue into other sections.
-
-#### scalar multiplication
-
-Both symbols can represent simple multiplication of scalars. The following are equivalent:
-
-![dotcross1](http://latex.codecogs.com/svg.latex?5%20%5Ccdot%204%20%3D%205%20%5Ctimes%204)
-
-<!-- 5 \cdot 4 = 5 \times 4 -->
-
-In programming languages we tend to use asterisk for multiplication:
-
-```cpp
-int result = 5 * 4;
-```
-
-Often, the multiplication sign is only used to avoid ambiguity (e.g. between two numbers). Here, we can omit it entirely:
-
-![dotcross2](http://latex.codecogs.com/svg.latex?3kj)
-
-<!-- 3kj -->
-
-If these variables represent scalars, the code would be:
-
-```cpp
-int result = 3 * k * j;
-```
-
-#### vector multiplication
-
-To denote multiplication of one vector with a scalar, or element-wise multiplication of a vector with another vector, we typically do not use the dot `·` or cross `×` symbols. These have different meanings in linear algebra, discussed shortly.
-
-Let's take our earlier example but apply it to vectors. For element-wise vector multiplication, you might see an open dot `∘` to represent the [Hadamard product](https://en.wikipedia.org/wiki/Hadamard_product_%28matrices%29).<sup>[2]</sup>
-
-![dotcross3](http://latex.codecogs.com/svg.latex?3%5Cmathbf%7Bk%7D%5Ccirc%5Cmathbf%7Bj%7D)
-
-<!-- 3\mathbf{k}\circ\mathbf{j} -->
-
-In other instances, the author might explicitly define a different notation, such as a circled dot `⊙` or a filled circle `●`.<sup>[3]</sup>
-
-Here is how it would look in code, using arrays `[x, y]` to represent the 2D vectors.
-
-```js
-var s = 3
-var k = [ 1, 2 ]
-var j = [ 2, 3 ]
-
-var tmp = multiply(k, j)
-var result = multiplyScalar(tmp, s)
-//=> [ 6, 18 ]
-```
-
-Our `multiply` and `multiplyScalar` functions look like this:
-
-```js
-function multiply(a, b) {
-  return [ a[0] * b[0], a[1] * b[1] ]
-}
-
-function multiplyScalar(a, scalar) {
-  return [ a[0] * scalar, a[1] * scalar ]
-}
-```
-
-Similarly, matrix multiplication typically does not use the dot `·` or cross symbol `×`. Matrix multiplication will be covered in a later section.
-
-#### dot product
-
-The dot symbol `·` can be used to denote the [*dot product*](https://en.wikipedia.org/wiki/Dot_product) of two vectors. Sometimes this is called the *scalar product* since it evaluates to a scalar.
-
-![dotcross4](http://latex.codecogs.com/svg.latex?%5Cmathbf%7Bk%7D%5Ccdot%20%5Cmathbf%7Bj%7D)
-
-<!-- \mathbf{k}\cdot \mathbf{j} -->
-
-It is a very common feature of linear algebra, and with a 3D vector it might look like this:
-
-```js
-var k = [ 0, 1, 0 ]
-var j = [ 1, 0, 0 ]
-
-var d = dot(k, j)
-//=> 0
-```
-
-The result `0` tells us our vectors are perpendicular. Here is a `dot` function for 3-component vectors:
-
-```js
-function dot(a, b) {
-  return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]
-}
-```
-
-#### cross product
-
-The cross symbol `×` can be used to denote the [*cross product*](https://en.wikipedia.org/wiki/Cross_product) of two vectors.
-
-![dotcross5](http://latex.codecogs.com/svg.latex?%5Cmathbf%7Bk%7D%5Ctimes%20%5Cmathbf%7Bj%7D)
-
-<!-- \mathbf{k}\times \mathbf{j} -->
-
-In code, it would look like this:
-
-```js
-var k = [ 0, 1, 0 ]
-var j = [ 1, 0, 0 ]
-
-var result = cross(k, j)
-//=> [ 0, 0, -1 ]
-```
-
-Here, we get `[ 0, 0, -1 ]`, which is perpendicular to both **k** and **j**.
-
-Our `cross` function:
-
-```js
-function cross(a, b) {
-  var ax = a[0], ay = a[1], az = a[2],
-    bx = b[0], by = b[1], bz = b[2]
-
-  var rx = ay * bz - az * by
-  var ry = az * bx - ax * bz
-  var rz = ax * by - ay * bx
-  return [ rx, ry, rz ]
-}
-```
-
-For other implementations of vector multiplication, cross product, and dot product:
-
-- [gl-vec3](https://github.com/stackgl/gl-vec3)
-- [gl-vec2](https://github.com/stackgl/gl-vec2)
-- [vectors](https://github.com/hughsk/vectors) - includes n-dimensional
-
 ## sigma 
 
 The big Greek `Σ` (Sigma) is for [Summation](https://en.wikipedia.org/wiki/Summation). In other words: summing up some numbers.
@@ -260,7 +127,8 @@ int main() {
 
 **Tip:** With whole numbers, this particular pattern can be optimized to the following:
 
-```#include <iostream>
+```cpp
+#include <iostream>
 
 using namespace std;
 
@@ -1015,6 +883,144 @@ Interval.difference(a, b)
 Interval.difference(b, a)
 // {lo: 5, hi: 6}
 ```
+
+## dot & cross
+
+The dot `·` and cross `×` symbols have different uses depending on context.
+
+They might seem obvious, but it's important to understand the subtle differences before we continue into other sections.
+
+#### scalar multiplication
+
+Both symbols can represent simple multiplication of scalars. The following are equivalent:
+
+![dotcross1](http://latex.codecogs.com/svg.latex?5%20%5Ccdot%204%20%3D%205%20%5Ctimes%204)
+
+<!-- 5 \cdot 4 = 5 \times 4 -->
+
+In programming languages we tend to use asterisk for multiplication:
+
+```cpp
+int result = 5 * 4;
+```
+
+Often, the multiplication sign is only used to avoid ambiguity (e.g. between two numbers). Here, we can omit it entirely:
+
+![dotcross2](http://latex.codecogs.com/svg.latex?3kj)
+
+<!-- 3kj -->
+
+If these variables represent scalars, the code would be:
+
+```cpp
+int result = 3 * k * j;
+```
+
+#### vector multiplication
+
+To denote multiplication of one vector with a scalar, or element-wise multiplication of a vector with another vector, we typically do not use the dot `·` or cross `×` symbols. These have different meanings in linear algebra, discussed shortly.
+
+Let's take our earlier example but apply it to vectors. For element-wise vector multiplication, you might see an open dot `∘` to represent the [Hadamard product](https://en.wikipedia.org/wiki/Hadamard_product_%28matrices%29).<sup>[2]</sup>
+
+![dotcross3](http://latex.codecogs.com/svg.latex?3%5Cmathbf%7Bk%7D%5Ccirc%5Cmathbf%7Bj%7D)
+
+<!-- 3\mathbf{k}\circ\mathbf{j} -->
+
+In other instances, the author might explicitly define a different notation, such as a circled dot `⊙` or a filled circle `●`.<sup>[3]</sup>
+
+Here is how it would look in code, using arrays `[x, y]` to represent the 2D vectors.
+
+```js
+var s = 3
+var k = [ 1, 2 ]
+var j = [ 2, 3 ]
+
+var tmp = multiply(k, j)
+var result = multiplyScalar(tmp, s)
+//=> [ 6, 18 ]
+```
+
+Our `multiply` and `multiplyScalar` functions look like this:
+
+```js
+function multiply(a, b) {
+  return [ a[0] * b[0], a[1] * b[1] ]
+}
+
+function multiplyScalar(a, scalar) {
+  return [ a[0] * scalar, a[1] * scalar ]
+}
+```
+
+Similarly, matrix multiplication typically does not use the dot `·` or cross symbol `×`. Matrix multiplication will be covered in a later section.
+
+#### dot product
+
+The dot symbol `·` can be used to denote the [*dot product*](https://en.wikipedia.org/wiki/Dot_product) of two vectors. Sometimes this is called the *scalar product* since it evaluates to a scalar.
+
+![dotcross4](http://latex.codecogs.com/svg.latex?%5Cmathbf%7Bk%7D%5Ccdot%20%5Cmathbf%7Bj%7D)
+
+<!-- \mathbf{k}\cdot \mathbf{j} -->
+
+It is a very common feature of linear algebra, and with a 3D vector it might look like this:
+
+```js
+var k = [ 0, 1, 0 ]
+var j = [ 1, 0, 0 ]
+
+var d = dot(k, j)
+//=> 0
+```
+
+The result `0` tells us our vectors are perpendicular. Here is a `dot` function for 3-component vectors:
+
+```js
+function dot(a, b) {
+  return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]
+}
+```
+
+#### cross product
+
+The cross symbol `×` can be used to denote the [*cross product*](https://en.wikipedia.org/wiki/Cross_product) of two vectors.
+
+![dotcross5](http://latex.codecogs.com/svg.latex?%5Cmathbf%7Bk%7D%5Ctimes%20%5Cmathbf%7Bj%7D)
+
+<!-- \mathbf{k}\times \mathbf{j} -->
+
+In code, it would look like this:
+
+```js
+var k = [ 0, 1, 0 ]
+var j = [ 1, 0, 0 ]
+
+var result = cross(k, j)
+//=> [ 0, 0, -1 ]
+```
+
+Here, we get `[ 0, 0, -1 ]`, which is perpendicular to both **k** and **j**.
+
+Our `cross` function:
+
+```js
+function cross(a, b) {
+  var ax = a[0], ay = a[1], az = a[2],
+    bx = b[0], by = b[1], bz = b[2]
+
+  var rx = ay * bz - az * by
+  var ry = az * bx - ax * bz
+  var rz = ax * by - ay * bx
+  return [ rx, ry, rz ]
+}
+```
+
+For other implementations of vector multiplication, cross product, and dot product:
+
+- [gl-vec3](https://github.com/stackgl/gl-vec3)
+- [gl-vec2](https://github.com/stackgl/gl-vec2)
+- [vectors](https://github.com/hughsk/vectors) - includes n-dimensional
+
+
 
 probable updates:
    evaluating a string expression
