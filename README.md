@@ -1,25 +1,5 @@
-# math-as-code
+# math-as-code CPP
 
->[Chinese translation (中文版)](./README-zh.md)  
->[Python version (English)](./PYTHON-README.md)
-
-This is a reference to ease developers into mathematical notation by showing comparisons with JavaScript code.
-
-Motivation: Academic papers can be intimidating for self-taught game and graphics programmers. :) 
-
-This guide is not yet finished. If you see errors or want to contribute, please [open a ticket](https://github.com/Jam3/math-as-code/issues) or send a PR.
-
-> **Note**: For brevity, some code examples make use of [npm packages](https://www.npmjs.com/). You can refer to their GitHub repos for implementation details.
-
-
-
-# foreword
-
-Mathematical symbols can mean different things depending on the author, context and the field of study (linear algebra, set theory, etc). This guide may not cover *all* uses of a symbol. In some cases, real-world references (blog posts, publications, etc) will be cited to demonstrate how a symbol might appear in the wild.
-
-For a more complete list, refer to [Wikipedia - List of Mathematical Symbols](https://en.wikipedia.org/wiki/List_of_mathematical_symbols). 
-
-For simplicity, many of the code examples here operate on floating point values and are not numerically robust. For more details on why this may be a problem, see [Robust Arithmetic Notes](https://github.com/mikolalysenko/robust-arithmetic-notes) by Mikola Lysenko.
 
 # contents
 
@@ -54,42 +34,6 @@ For simplicity, many of the code examples here operate on floating point values 
 - [intervals](#intervals)
 - [more...](#more)
 
-## variable name conventions
-
-There are a variety of naming conventions depending on the context and field of study, and they are not always consistent. However, in some of the literature you may find variable names to follow a pattern like so:
-
-- *s* - italic lowercase letters for scalars (e.g. a number)
-- **x** - bold lowercase letters for vectors (e.g. a 2D point)
-- **A** - bold uppercase letters for matrices (e.g. a 3D transformation)
-- *θ* - italic lowercase Greek letters for constants and special variables (e.g. [polar angle *θ*, *theta*](https://en.wikipedia.org/wiki/Spherical_coordinate_system))
-
-This will also be the format of this guide.
-
-## equals symbols
-
-There are a number of symbols resembling the equals sign `=`. Here are a few common examples:
-
-- `=` is for equality (values are the same)
-- `≠` is for inequality (value are not the same)
-- `≈` is for approximately equal to (`π ≈ 3.14159`)
-- `:=` is for definition (A is defined as B)
-
-In JavaScript:
-
-```js
-// equality
-2 === 3
-
-// inequality
-2 !== 3
-
-// approximately equal
-almostEqual(Math.PI, 3.14159, 1e-5)
-
-function almostEqual(a, b, epsilon) {
-  return Math.abs(a - b) <= epsilon
-}
-```
 
 You might see the `:=`, `=:` and `=` symbols being used for *definition*.<sup>[1]</sup>
 
@@ -1052,24 +996,3 @@ Interval.difference(a, b)
 Interval.difference(b, a)
 // {lo: 5, hi: 6}
 ```
-
-See:
-
-- [next-after](https://github.com/scijs/nextafter) 
-- [interval-arithmetic](https://github.com/maurizzzio/interval-arithmetic)
-
-## more...
-
-Like this guide? Suggest some [more features](https://github.com/Jam3/math-as-code/issues/1) or send us a Pull Request!
-
-## Contributing
-
-For details on how to contribute, see [CONTRIBUTING.md](./CONTRIBUTING.md).
-
-## License
-
-MIT, see [LICENSE.md](http://github.com/Jam3/math-as-code/blob/master/LICENSE.md) for details.
-
-[1]: http://mimosa-pudica.net/improved-oren-nayar.html#images
-[2]: http://buzzard.ups.edu/courses/2007spring/projects/million-paper.pdf
-[3]: https://www.math.washington.edu/~morrow/464_12/fft.pdf
